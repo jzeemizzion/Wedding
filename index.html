@@ -3,97 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sarah & James | The Wedding</title>
+  <title>Messy & Cloyd | The Wedding</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --primary-blue: #8EB1D1;
-      --secondary-blue: #A7C7E7;
-      --dark-navy: #1C2B48;
-      --off-white: #E8ECEF;
-      --white: #ffffff;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Lato', sans-serif; color: var(--dark-navy); background-color: var(--off-white); line-height: 1.6; }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 600; }
-    a { text-decoration: none; color: inherit; transition: 0.3s; }
-    .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 0 15px; }
-    .btn { display: inline-block; background-color: var(--primary-blue); color: var(--white); padding: 12px 30px; border-radius: 50px; font-size: 0.9rem; text-transform: uppercase; border: 2px solid var(--primary-blue); cursor: pointer; }
-    .btn:hover { background-color: transparent; color: var(--primary-blue); }
-    .section-padding { padding: 80px 0; }
-
-    header { background-color: var(--off-white); padding: 20px 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(28,43,72,0.05); }
-    nav { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--dark-navy); }
-    .nav-links { display: flex; gap: 30px; }
-    .nav-links a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--dark-navy); }
-    .nav-links a:hover { color: var(--primary-blue); }
-    .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
-
-    #hero { height: 100vh; background: linear-gradient(rgba(28,43,72,0.4), rgba(28,43,72,0.4)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); }
-    .hero-content h1 { font-size: 4rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-    .hero-content p { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 30px; font-weight: 300; }
-    .hero-date { font-size: 1.2rem; border-top: 1px solid var(--white); border-bottom: 1px solid var(--white); display: inline-block; padding: 10px 20px; margin-top: 20px; }
-
-    #story { background-color: var(--white); text-align: center; }
-    .section-title { font-size: 2.5rem; color: var(--dark-navy); margin-bottom: 20px; position: relative; display: inline-block; }
-    .section-title::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--primary-blue); margin: 10px auto 0; }
-    .story-text { max-width: 700px; margin: 0 auto; font-size: 1.1rem; color: #555; }
-
-    #details { background-color: var(--dark-navy); color: var(--white); text-align: center; position: relative; overflow: hidden; }
-    #details .section-title { color: var(--white); }
-    .scroll-container { display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding: 40px 0; -ms-overflow-style: none; scrollbar-width: none; }
-    .scroll-container::-webkit-scrollbar { display: none; }
-    .scroll-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: var(--primary-blue); color: var(--white); border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-    .scroll-btn:hover { background-color: var(--secondary-blue); }
-    .scroll-btn.left { left: 10px; }
-    .scroll-btn.right { right: 10px; }
-    .detail-card { min-width: 300px; max-width: 300px; height: 450px; border-radius: 12px; position: relative; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.3); flex-shrink: 0; }
-    .card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1; }
-    .card-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(28,43,72,0.3), rgba(28,43,72,0.9)); z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; }
-    .detail-card h3 { color: var(--white); font-size: 1.8rem; margin-bottom: 10px; }
-    .detail-card p { color: var(--secondary-blue); margin-bottom: 15px; font-size: 1.1rem; }
-    .map-container { width: 100%; height: 150px; background: #ddd; margin-top: 15px; border-radius: 8px; overflow: hidden; }
-    .map-container iframe { width: 100%; height: 100%; border: 0; }
-
-    #rsvp { background-color: var(--off-white); text-align: center; }
-    .rsvp-form { max-width: 600px; margin: 40px auto 0; background: var(--white); padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-top: 5px solid var(--primary-blue); }
-    .form-group { margin-bottom: 20px; text-align: left; }
-    .form-group label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.9rem; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Lato', sans-serif; font-size: 1rem; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-blue); }
-
-    footer { background-color: var(--dark-navy); color: var(--white); text-align: center; padding: 40px 0; }
-    footer p { opacity: 0.8; font-size: 0.9rem; }
-
-    @media (max-width: 768px) {
-      .hero-content h1 { font-size: 2.5rem; }
-            .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        right: 0;
-        background-color: var(--white);
-        width: 100%;
-        text-align: center;
-        padding: 20px 0;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-      }
-      .nav-links.active { display: flex; }
-      .hamburger { display: block; }
-      .scroll-btn { width: 40px; height: 40px; font-size: 1rem; }
-      .scroll-btn.left { left: 5px; }
-      .scroll-btn.right { right: 5px; }
-      .detail-card { min-width: 280px; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -117,8 +34,8 @@
   <section id="hero">
     <div class="container hero-content">
       <p>WE ARE GETTING MARRIED</p>
-      <h1>Sarah & James</h1>
-      <div class="hero-date">September 24, 2024</div>
+      <h1>Messy & Cloyd</h1>
+      <div class="hero-date">November 4, 2026</div>
       <br><br>
       <a href="#rsvp" class="btn">RSVP Now</a>
     </div>
@@ -130,8 +47,7 @@
       <h2 class="section-title">Our Story</h2>
       <br><br>
       <p class="story-text">
-        It started with a coffee spill in a busy downtown café. What began as an awkward apology turned into a conversation that lasted for hours. From that day on, we've been inseparable. We've traveled the world, adopted a golden retriever, and built a life filled with laughter. Now, we are ready to start our next chapter together.
-      </p>
+        Luyag luyag si Messy kay Cloyd.
     </div>
   </section>
 
@@ -139,57 +55,91 @@
   <section id="details" class="section-padding">
     <div class="container">
       <h2 class="section-title">The Details</h2>
-      <p style="color: var(--secondary-blue); margin-top: 10px;">Swipe to see locations</p>
-      <button class="scroll-btn left" onclick="scrollDetails(-300)">&#10094;</button>
+      <p style="color: var(--secondary-blue); margin-top: 10px;">Tap card to flip and see image</p>
+      <button class="scroll-btn left" onclick="scrollDetails(-300)">‹</button>
       <div class="scroll-container" id="detailsContainer">
         <!-- Ceremony Card -->
-        <div class="detail-card">
-          <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-          <div class="card-overlay">
-            <h3>The Ceremony</h3>
-            <p>Saturday, Sept 24 @ 4:00 PM</p>
-            <p>St. Mary's Cathedral</p>
-            <div class="map-container">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!..."></iframe>
+        <div class="detail-card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+              <div class="card-overlay">
+                <h3>The Ceremony</h3>
+                <p>Tuesday, Nov 4 @ 4:00 PM</p>
+                <p>Our Lady Of Candles Parish-Bacolod</p>
+                <div class="map-container">
+                  <a href="https://www.google.com/maps/place/Our+Lady+Of+Candles+Parish-Bacolod/@10.6675183,122.9754351,17z/data=!3m1!4b1!4m6!3m5!1s0x33aed18ffb43fdc3:0x84183bb1abb2b9f1!8m2!3d10.6675183!4d122.97801!16s%2Fg%2F1tvyj8wd?entry=ttu&g_ep=EgoyMDI2MDMxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="see-location">see location</a>
+                  <div class="map-popup">
+                    <img src="assets/Candles.png" alt="Our Lady Of Candles Parish" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-back">
+              <img src="assets/Candles.png" alt="Our Lady Of Candles Parish" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
             </div>
           </div>
         </div>
         <!-- Reception Card -->
-        <div class="detail-card">
-          <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0202128?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-          <div class="card-overlay">
-            <h3>The Reception</h3>
-            <p>Saturday, Sept 24 @ 6:00 PM</p>
-            <p>The Grand Garden Hall</p>
-            <div class="map-container">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!..."></iframe>
+        <div class="detail-card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0202128?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+              <div class="card-overlay">
+                <h3>The Reception</h3>
+                <p>Tuesday, Nov 4 @ 6:00 PM</p>
+                <p>Padre Pio Pavilion, Natures Village Resort</p>
+                <div class="map-container">
+                  <a href="https://www.google.com/maps/place/Padre+Pio+Pavilion,+Natures+Village+Resort/@10.7257442,122.9625387,17z/data=!3m1!4b1!4m6!3m5!1s0x33aed702d7214005:0x10423f90af27373e!8m2!3d10.7257442!4d122.9651136!16s%2Fg%2F11sh79vbrs?entry=ttu&g_ep=EgoyMDI2MDMxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="see-location">see location</a>
+                  <div class="map-popup">
+                    <img src="assets/Padre-pio.png" alt="Padre Pio Pavilion" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-back">
+              <img src="assets/Padre-pio.png" alt="Padre Pio Pavilion" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
             </div>
           </div>
         </div>
         <!-- Dress Code Card -->
-        <div class="detail-card">
-          <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1594552072238-b8a3377044b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-          <div class="card-overlay">
-            <h3>Dress Code</h3>
-            <p>Black Tie Optional</p>
-            <p>Formal attire requested.</p>
-            <p style="color: var(--primary-blue); font-size: 0.9rem; margin-top: 10px;">(We love blue!)</p>
+        <div class="detail-card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1594552072238-b8a3377044b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+              <div class="card-overlay">
+                <h3>Dress Code</h3>
+                <p>Black Tie Optional</p>
+                <p>Formal attire requested.</p>
+                <p style="color: var(--primary-blue); font-size: 0.9rem; margin-top: 10px;">(We love blue!)</p>
+              </div>
+            </div>
+            <div class="card-back">
+              <img src="assets/Color palette.png" alt="Color Palette" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+            </div>
           </div>
         </div>
-	<!-- FAQ Card -->
-	<div class="detail-card">
-  	<div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1581090700227-4c4f2c1b6c3a?ixlib=rb-1.2.1	&auto=format&fit=crop&w=800&q=80');"></div>
-  	<div class="card-overlay">
-    	<h3>FAQ</h3>
-    	<p>Have questions?</p>
-    	<p>Check back soon for answers.</p>
-    	<p style="color: var(--primary-blue); font-size: 0.9rem; margin-top: 10px;">
-      	(Placeholder for Frequently Asked Questions)
-    	</p>
-  	</div>
-	</div>
+        <!-- FAQ Card -->
+        <div class="detail-card" onclick="flipCard(this)">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1581090700227-4c4f2c1b6c3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+              <div class="card-overlay">
+                <h3>FAQ</h3>
+                <p>Have questions?</p>
+                <p>Check back soon for answers.</p>
+                <p style="color: var(--primary-blue); font-size: 0.9rem; margin-top: 10px;">
+                  (Placeholder for Frequently Asked Questions)
+                </p>
+              </div>
+            </div>
+            <div class="card-back">
+              <img src="assets/Color palette.png" alt="Coming Soon" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+            </div>
+          </div>
+        </div>
       </div>
-      <button class="scroll-btn right" onclick="scrollDetails(300)">&#10095;</button>
+      <button class="scroll-btn right" onclick="scrollDetails(300)">›</button>
     </div>
   </section>
 
@@ -197,7 +147,7 @@
   <section id="rsvp" class="section-padding">
     <div class="container">
       <h2 class="section-title">RSVP</h2>
-      <p>Kindly respond by August 1st, 2024</p>
+      <p>Kindly respond by October 1st, 2026</p>
       <form class="rsvp-form">
         <div class="form-group">
           <label for="name">Full Name</label>
@@ -231,28 +181,13 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <h3>Sarah & James</h3>
-      <p>#SarahAndJames2024</p>
+      <h3>Messy & Cloyd</h3>
+      <p>#MessyAndCloyd2026</p>
       <br>
-      <p>&copy; 2024 Wedding Website. Made with love.</p>
+      <p>&copy; 2026 Wedding Website. Made with love.</p>
     </div>
   </footer>
 
-  <script>
-    // Toggle Mobile Menu
-    function toggleMenu() {
-      const nav = document.getElementById('navLinks');
-      nav.classList.toggle('active');
-    }
-
-    // Horizontal Scroll Function
-    function scrollDetails(distance) {
-      const container = document.getElementById('detailsContainer');
-      container.scrollBy({
-        left: distance,
-        behavior: 'smooth'
-      });
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
