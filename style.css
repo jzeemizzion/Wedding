@@ -50,7 +50,7 @@
     .scroll-btn.left { left: 10px; }
     .scroll-btn.right { right: 10px; }
 
-    /* Card Flip Styles */
+    /* Card Transition Styles */
     .detail-card { 
       min-width: 300px; 
       max-width: 300px; 
@@ -62,7 +62,7 @@
       flex-shrink: 0; 
       cursor: pointer; 
       touch-action: manipulation; /* Mobile: better tap response */
-      perspective: 1000px; /* 3D flip */
+      perspective: none;
     }
     .detail-card { scroll-snap-align: start; }
     .card-inner { 
@@ -70,23 +70,51 @@
       width: 100%; 
       height: 100%; 
       text-align: center; 
-      transition: transform 0.8s; 
-      transform-style: preserve-3d; 
+      transition: none;
+      transform-style: flat;
       border-radius: 12px;
-    }
-    .detail-card.flipped .card-inner { 
-      transform: rotateY(180deg); 
     }
     .card-front, .card-back { 
       position: absolute; 
       width: 100%; 
       height: 100%; 
-      backface-visibility: hidden; 
+      backface-visibility: visible;
       border-radius: 12px; 
       overflow: hidden;
+      transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s ease;
     }
-    .card-back { 
-      transform: rotateY(180deg); 
+    .card-front {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .card-back {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+    }
+    .detail-card.flipped .card-front {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+    }
+    .detail-card.flipped .card-back {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    @media (min-width: 769px) {
+      .detail-card:hover .card-front {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+      }
+      .detail-card:hover .card-back {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
     }
     .card-bg { 
       position: absolute; 
@@ -116,31 +144,6 @@
     .map-container { position: relative; margin-top: 15px; }
     .see-location { color: var(--primary-blue); text-decoration: underline; font-size: 1rem; text-transform: lowercase; }
     .see-location:hover { color: var(--secondary-blue); }
-    .map-popup { 
-      display: none; 
-      position: absolute; 
-      bottom: 100%; 
-      left: 50%; 
-      transform: translateX(-50%); 
-      width: 290px; 
-      height: 210px; 
-      background: var(--white); 
-      border: 1px solid #ccc; 
-      border-radius: 16px; 
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
-      z-index: 100; 
-      padding: 5px; 
-    }
-    .map-popup::after { 
-      content: ''; 
-      position: absolute; 
-      top: 100%; 
-      left: 50%; 
-      transform: translateX(-50%); 
-      border: 5px solid transparent; 
-      border-top-color: var(--white); 
-    }
-    .map-container:hover .map-popup { display: block; }
 
     /* RSVP */
     #rsvp { background-color: var(--off-white); text-align: center; }
@@ -149,9 +152,7 @@
     .form-group label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.9rem; }
     .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Lato', sans-serif; font-size: 1rem; }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-blue); }
-    .rsvp-embed-wrapper { max-width: 760px; padding: 20px; }
-    .rsvp-embed { width: 100%; height: clamp(720px, 85vh, 1100px); border: 0; border-radius: 8px; background: var(--white); }
-    .rsvp-open-link { margin-top: 20px; }
+    .rsvp-form .btn { margin-top: 8px; }
 
     /* Footer */
     footer { background-color: var(--dark-navy); color: var(--white); text-align: center; padding: 40px 0; }
@@ -164,8 +165,6 @@
       .countdown-item { min-width: 72px; padding: 12px 10px; }
       .countdown-value { font-size: 1.5rem; }
       .countdown-label { font-size: 0.68rem; letter-spacing: 1px; }
-      .rsvp-embed-wrapper { padding: 16px; }
-      .rsvp-embed { height: clamp(760px, 88vh, 1200px); }
       .nav-links {
         display: none;
         flex-direction: column;
@@ -189,7 +188,7 @@
         min-width: 100%; 
         max-width: 100%; 
         height: 50vh; 
-        perspective: 800px; /* Adjust for mobile */
+        perspective: none;
       }
       .scroll-container { 
         gap: 0; 
@@ -199,8 +198,6 @@
       .card-overlay { padding: 15px; }
       .detail-card h3 { font-size: 1.5rem; }
       .detail-card p { font-size: 1rem; }
-      /* Improve mobile flip */
-      .card-inner { transition: transform 0.6s ease; }
     }
 
     @media (max-width: 480px) {

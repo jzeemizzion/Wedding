@@ -37,50 +37,6 @@ function updateCountdown() {
   secondsElement.textContent = String(seconds).padStart(2, '0');
 }
 
-function adjustRsvpEmbedHeight() {
-  const rsvpEmbed = document.getElementById('rsvpEmbed');
-  if (!rsvpEmbed) {
-    return;
-  }
-
-  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  const baseHeight = isMobile ? Math.round(viewportHeight * 0.88) : Math.round(viewportHeight * 0.85);
-  const minHeight = isMobile ? 760 : 720;
-  const maxHeight = isMobile ? 1200 : 1100;
-  const targetHeight = Math.max(minHeight, Math.min(maxHeight, baseHeight));
-
-  rsvpEmbed.style.height = `${targetHeight}px`;
-}
-
-function handleRsvpEmbedMessage(event) {
-  if (!event.origin.includes('google.com')) {
-    return;
-  }
-
-  const rsvpEmbed = document.getElementById('rsvpEmbed');
-  if (!rsvpEmbed) {
-    return;
-  }
-
-  if (typeof event.data === 'object' && event.data !== null && typeof event.data.height === 'number') {
-    const safeHeight = Math.max(700, Math.min(1600, Math.round(event.data.height)));
-    rsvpEmbed.style.height = `${safeHeight}px`;
-    return;
-  }
-
-  if (typeof event.data === 'string') {
-    const numericMatch = event.data.match(/height\D*(\d{3,4})/i);
-    if (numericMatch && numericMatch[1]) {
-      const parsedHeight = Number(numericMatch[1]);
-      if (!Number.isNaN(parsedHeight)) {
-        const safeHeight = Math.max(700, Math.min(1600, parsedHeight));
-        rsvpEmbed.style.height = `${safeHeight}px`;
-      }
-    }
-  }
-}
-
 // Horizontal Scroll Function
 function scrollDetails(distance) {
   const container = document.getElementById('detailsContainer');
@@ -105,25 +61,21 @@ function scrollDetails(distance) {
   });
 }
 
-// Flip Card Function - Mobile only (tap to flip), desktop uses hover popup
+// Card Toggle Function - Mobile tap to transition between front and back
 function flipCard(card) {
-  // Check if mobile/touch device
-  const isMobile = window.matchMedia('(max-width: 768px)').matches || 
-                   'ontouchstart' in window || 
-                   navigator.maxTouchPoints > 0;
-  
-  if (!isMobile) return; // Desktop: no flip, use hover popup
-  
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  if (!isMobile) return;
+
   const inner = card.querySelector('.card-inner');
   if (inner) {
     card.classList.toggle('flipped');
     
-    // Prevent scroll interference on mobile
+    // Prevent scroll interference while card transitions
     const container = document.getElementById('detailsContainer');
     container.style.scrollSnapStop = 'always';
     setTimeout(() => {
       container.style.scrollSnapStop = '';
-    }, 800);
+    }, 450);
   }
 }
 
@@ -131,9 +83,4 @@ function flipCard(card) {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
-adjustRsvpEmbedHeight();
-
-window.addEventListener('resize', adjustRsvpEmbedHeight);
-window.addEventListener('orientationchange', adjustRsvpEmbedHeight);
-window.addEventListener('message', handleRsvpEmbedMessage);
 
