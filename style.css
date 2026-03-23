@@ -142,8 +142,69 @@
     .detail-card p { margin-bottom: 15px; font-size: 1.1rem; }
     .detail-card p a { color: var(--primary-blue); text-decoration: underline; }
     .map-container { position: relative; margin-top: 15px; }
-    .see-location { color: var(--primary-blue); text-decoration: underline; font-size: 1rem; text-transform: lowercase; }
-    .see-location:hover { color: var(--secondary-blue); }
+    .see-location {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 8px 14px;
+      border-radius: 14px;
+      border: 1.5px solid var(--primary-blue);
+      background-color: rgba(167, 199, 231, 0.15);
+      color: var(--white);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .see-location::before {
+      content: '';
+      position: absolute;
+      top: -130%;
+      left: -30%;
+      width: 42%;
+      height: 360%;
+      background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 45%, rgba(255,255,255,0) 100%);
+      transform: rotate(18deg);
+      animation: seeLocationShimmer 4.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .see-location::after {
+      content: '✦';
+      position: absolute;
+      right: 10px;
+      top: 6px;
+      font-size: 0.58rem;
+      color: var(--secondary-blue);
+      text-shadow: 0 0 5px rgba(255,255,255,0.35);
+      animation: seeLocationSparkle 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .see-location:hover {
+      background-color: var(--primary-blue);
+      border-color: var(--secondary-blue);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    }
+    .see-location:focus-visible {
+      outline: 2px solid var(--secondary-blue);
+      outline-offset: 2px;
+    }
+
+    @keyframes seeLocationShimmer {
+      0%, 20% { transform: translateX(-140%) rotate(18deg); opacity: 0; }
+      35% { opacity: 1; }
+      55% { transform: translateX(300%) rotate(18deg); opacity: 0; }
+      100% { transform: translateX(300%) rotate(18deg); opacity: 0; }
+    }
+
+    @keyframes seeLocationSparkle {
+      0%, 100% { transform: scale(0.88) rotate(0deg); opacity: 0.3; }
+      50% { transform: scale(1.08) rotate(12deg); opacity: 0.65; }
+    }
 
     /* RSVP */
     #rsvp { background-color: var(--off-white); text-align: center; }
