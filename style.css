@@ -143,21 +143,28 @@
     .detail-card p a { color: var(--primary-blue); text-decoration: underline; }
     .map-container { position: relative; margin-top: 15px; }
     .see-location {
+      display: -webkit-inline-flex;
       display: inline-flex;
+      -webkit-align-items: center;
       align-items: center;
+      -webkit-justify-content: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
       padding: 8px 14px;
       border-radius: 14px;
+      border: 1.5px solid #8EB1D1;
       border: 1.5px solid var(--primary-blue);
       background-color: rgba(167, 199, 231, 0.15);
+      color: #ffffff;
       color: var(--white);
+      font-family: 'Lato', sans-serif;
       font-size: 0.84rem;
       font-weight: 700;
       letter-spacing: 0.4px;
       text-transform: uppercase;
       text-decoration: none;
+      -webkit-transition: background-color 0.25s ease, border-color 0.25s ease, -webkit-transform 0.25s ease, box-shadow 0.25s ease;
       transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .see-location::before {
@@ -167,33 +174,48 @@
       left: -30%;
       width: 42%;
       height: 360%;
+      background: -webkit-linear-gradient(330deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 45%, rgba(255,255,255,0) 100%);
       background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 45%, rgba(255,255,255,0) 100%);
+      -webkit-transform: rotate(18deg);
       transform: rotate(18deg);
+      -webkit-animation: seeLocationShimmer 4.6s ease-in-out infinite;
       animation: seeLocationShimmer 4.6s ease-in-out infinite;
       pointer-events: none;
     }
     .see-location::after {
-      content: '✦';
+      content: '\2726';
       position: absolute;
       right: 10px;
       top: 6px;
       font-size: 0.58rem;
+      color: #A7C7E7;
       color: var(--secondary-blue);
       text-shadow: 0 0 5px rgba(255,255,255,0.35);
+      -webkit-animation: seeLocationSparkle 2.4s ease-in-out infinite;
       animation: seeLocationSparkle 2.4s ease-in-out infinite;
       pointer-events: none;
     }
     .see-location:hover {
+      background-color: #8EB1D1;
       background-color: var(--primary-blue);
+      border-color: #A7C7E7;
       border-color: var(--secondary-blue);
+      -webkit-transform: translateY(-1px);
       transform: translateY(-1px);
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
     }
     .see-location:focus-visible {
+      outline: 2px solid #A7C7E7;
       outline: 2px solid var(--secondary-blue);
       outline-offset: 2px;
     }
 
+    @-webkit-keyframes seeLocationShimmer {
+      0%, 20% { -webkit-transform: translateX(-140%) rotate(18deg); transform: translateX(-140%) rotate(18deg); opacity: 0; }
+      35% { opacity: 1; }
+      55% { -webkit-transform: translateX(300%) rotate(18deg); transform: translateX(300%) rotate(18deg); opacity: 0; }
+      100% { -webkit-transform: translateX(300%) rotate(18deg); transform: translateX(300%) rotate(18deg); opacity: 0; }
+    }
     @keyframes seeLocationShimmer {
       0%, 20% { transform: translateX(-140%) rotate(18deg); opacity: 0; }
       35% { opacity: 1; }
@@ -201,6 +223,10 @@
       100% { transform: translateX(300%) rotate(18deg); opacity: 0; }
     }
 
+    @-webkit-keyframes seeLocationSparkle {
+      0%, 100% { -webkit-transform: scale(0.88) rotate(0deg); transform: scale(0.88) rotate(0deg); opacity: 0.3; }
+      50% { -webkit-transform: scale(1.08) rotate(12deg); transform: scale(1.08) rotate(12deg); opacity: 0.65; }
+    }
     @keyframes seeLocationSparkle {
       0%, 100% { transform: scale(0.88) rotate(0deg); opacity: 0.3; }
       50% { transform: scale(1.08) rotate(12deg); opacity: 0.65; }
