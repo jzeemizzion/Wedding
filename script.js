@@ -48,8 +48,9 @@ function scrollDetails(distance) {
     const cardGap = parseFloat(cardStyles.marginRight) || 0;
     const cardDistance = firstCard.getBoundingClientRect().width + cardGap;
 
+    // Slightly reduce step size on mobile so swipe/buttons feel less jumpy.
     container.scrollBy({
-      left: Math.sign(distance) * cardDistance,
+      left: Math.sign(distance) * (cardDistance * 0.85),
       behavior: 'smooth'
     });
     return;
