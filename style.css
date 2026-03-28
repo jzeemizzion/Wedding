@@ -4,8 +4,8 @@
       --dark-navy: #1C2B48;
       --off-white: #E8ECEF;
       --white: #ffffff;
-  --fancy-script: 'Great Vibes', cursive;
-  --fancy-serif: 'Cormorant Garamond', serif;
+  --fancy-script: 'Great Vibes', 'Segoe Script', 'Brush Script MT', cursive;
+  --fancy-serif: 'Cormorant Garamond', 'Times New Roman', serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -47,9 +47,11 @@
       row-gap: 0.04em;
     }
     .hero-invite .invite-word {
+      display: inline-block;
       opacity: 0;
+      -webkit-transform: translateY(18px);
       transform: translateY(18px);
-      filter: blur(2px);
+      -webkit-animation: inviteWordReveal 0.52s ease forwards;
       animation: inviteWordReveal 0.52s ease forwards;
       will-change: transform, opacity;
     }
@@ -68,7 +70,9 @@
       letter-spacing: 1.35px;
       margin-bottom: 8px;
       opacity: 0;
+      -webkit-transform: translateY(20px);
       transform: translateY(20px);
+      -webkit-animation: heroTitleReveal 1.15s cubic-bezier(.2,.65,.2,1) 1.02s forwards;
       animation: heroTitleReveal 1.15s cubic-bezier(.2,.65,.2,1) 1.02s forwards;
     }
         @keyframes inviteWordReveal {
@@ -85,34 +89,60 @@
         }
 
     .hero-date { font-size: 1.2rem; border-top: 1px solid var(--white); border-bottom: 1px solid var(--white); display: inline-block; padding: 10px 20px; margin-top: 20px; }
-        @keyframes heroTitleReveal {
+        @-webkit-keyframes inviteWordReveal {
+          0% {
+            opacity: 0;
+            -webkit-transform: translateY(18px);
+            transform: translateY(18px);
+          }
+          100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes inviteWordReveal {
           0% {
             opacity: 0;
             transform: translateY(22px) scale(0.98);
-            filter: blur(4px);
           }
           60% {
             opacity: 1;
             transform: translateY(-2px) scale(1.005);
-            filter: blur(0);
           }
           100% {
             opacity: 1;
+        @-webkit-keyframes heroTitleReveal {
+          0% {
+            opacity: 0;
+            -webkit-transform: translateY(22px) scale(0.98);
+            transform: translateY(22px) scale(0.98);
+          }
+          60% {
+            opacity: 1;
+            -webkit-transform: translateY(-2px) scale(1.005);
+            transform: translateY(-2px) scale(1.005);
+          }
+          100% {
+            opacity: 1;
+            -webkit-transform: translateY(0) scale(1);
+            transform: translateY(0) scale(1);
+          }
+        }
+
             transform: translateY(0) scale(1);
             filter: blur(0);
           }
         }
-
     .countdown { display: flex; justify-content: center; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
     .countdown-item { min-width: 88px; padding: 14px 12px; border: 1px solid rgba(255,255,255,0.35); border-radius: 16px; background: rgba(255,255,255,0.12); backdrop-filter: blur(6px); }
     .countdown-value { display: block; font-size: 2rem; font-weight: 700; line-height: 1; }
     .countdown-label { display: block; margin-top: 8px; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; }
-
     /* Story */
     #story { background-color: var(--white); text-align: center; }
     .section-title { font-size: 2.5rem; color: var(--dark-navy); margin-bottom: 20px; position: relative; display: inline-block; }
     .section-title::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--primary-blue); margin: 10px auto 0; }
-    .story-text { max-width: 700px; margin: 0 auto; font-size: 1.1rem; color: #555; }
 
     /* Details - Flip Cards */
     #details { background-color: var(--dark-navy); color: var(--white); text-align: center; position: relative; overflow: hidden; }
@@ -424,9 +454,10 @@
     @media (prefers-reduced-motion: reduce) {
       .hero-invite .invite-word,
       .hero-names {
+        -webkit-animation: none;
         animation: none;
         opacity: 1;
+        -webkit-transform: none;
         transform: none;
-        filter: none;
       }
     }
