@@ -40,6 +40,8 @@ function updateCountdown() {
 // Horizontal Scroll Function
 function scrollDetails(distance) {
   const container = document.getElementById('detailsContainer');
+  if (!container) return;
+
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   const firstCard = container.querySelector('.detail-card');
 
@@ -48,9 +50,8 @@ function scrollDetails(distance) {
     const cardGap = parseFloat(cardStyles.marginRight) || 0;
     const cardDistance = firstCard.getBoundingClientRect().width + cardGap;
 
-    // Slightly reduce step size on mobile so swipe/buttons feel less jumpy.
     container.scrollBy({
-      left: Math.sign(distance) * (cardDistance * 0.85),
+      left: Math.sign(distance) * cardDistance,
       behavior: 'smooth'
     });
     return;
@@ -60,6 +61,33 @@ function scrollDetails(distance) {
     left: distance,
     behavior: 'smooth'
   });
+}
+
+function initDetailsArrows() {
+  const container = document.getElementById('detailsContainer');
+  const leftArrow = document.getElementById('detailsScrollLeft');
+  const rightArrow = document.getElementById('detailsScrollRight');
+
+  if (!container || !leftArrow || !rightArrow) {
+    return;
+  }
+
+  const updateArrowState = () => {
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+    const scrollLeft = container.scrollLeft;
+    const edgeBuffer = 4;
+
+    leftArrow.disabled = scrollLeft <= edgeBuffer;
+    rightArrow.disabled = scrollLeft >= maxScrollLeft - edgeBuffer;
+  };
+
+  const onScroll = () => {
+    window.requestAnimationFrame(updateArrowState);
+  };
+
+  container.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', updateArrowState);
+  updateArrowState();
 }
 
 // Card Toggle Function - Mobile tap to transition between front and back
@@ -84,4 +112,5 @@ function flipCard(card) {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+initDetailsArrows();
 

@@ -8,7 +8,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Great+Vibes&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -33,8 +33,18 @@
   <!-- Hero Section -->
   <section id="hero">
     <div class="container hero-content">
-      <p>WE ARE GETTING MARRIED</p>
-      <h1>Messy & Cloyd</h1>
+      <p class="hero-invite" aria-label="You are cordially invited to celebrate the Wedding of">
+        <span class="invite-word">You</span>
+        <span class="invite-word">are</span>
+        <span class="invite-word">cordially</span>
+        <span class="invite-word">invited</span>
+        <span class="invite-word">to</span>
+        <span class="invite-word">celebrate</span>
+        <span class="invite-word">the</span>
+        <span class="invite-word">Wedding</span>
+        <span class="invite-word">of</span>
+      </p>
+      <h1 class="hero-names">Messy & Cloyd</h1>
       <div class="hero-date">November 4, 2026</div>
       <div class="countdown" id="countdown" aria-label="Countdown to the wedding">
         <div class="countdown-item">
@@ -74,7 +84,7 @@
     <div class="container">
       <h2 class="section-title">The Details</h2>
       <p style="color: var(--secondary-blue); margin-top: 10px;">Swipe and explore to see details</p>
-      <button class="scroll-btn left" onclick="scrollDetails(-300)">‹</button>
+      <button id="detailsScrollLeft" class="scroll-btn left" type="button" aria-label="Scroll details left" title="Scroll left" onclick="scrollDetails(-300)">&larr;</button>
       <div class="scroll-container" id="detailsContainer">
         <!-- Ceremony Card -->
         <div class="detail-card" onclick="flipCard(this)">
@@ -82,7 +92,7 @@
             <div class="card-front">
               <div class="card-bg" style="background-image: url('assets/church.png');"></div>
               <div class="card-overlay">
-                <h3>The Ceremony</h3>
+                <h3>Ceremony</h3>
                 <p>Tuesday, Nov 4 @ 4:00 PM</p>
                 <p>Our Lady Of Candles Parish-Bacolod</p>
                 <div class="map-container">
@@ -93,7 +103,7 @@
             <div class="card-back">
               <img src="assets/Candles.png" alt="Our Lady Of Candles Parish" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
               <div class="card-overlay">
-                <h3>The Ceremony</h3>
+                <h3>Ceremony</h3>
                 <p>Tuesday, Nov 4 @ 4:00 PM</p>
                 <p>Our Lady Of Candles Parish-Bacolod</p>
                 <div class="map-container">
@@ -109,7 +119,7 @@
             <div class="card-front">
               <div class="card-bg" style="background-image: url('assets/Reception.png');"></div>
               <div class="card-overlay">
-                <h3>The Reception</h3>
+                <h3>Reception</h3>
                 <p>Tuesday, Nov 4 @ 6:00 PM</p>
                 <p>Padre Pio Pavilion, Natures Village Resort</p>
                 <div class="map-container">
@@ -120,7 +130,7 @@
             <div class="card-back">
               <img src="assets/Padre-pio.png" alt="Padre Pio Pavilion" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
               <div class="card-overlay">
-                <h3>The Reception</h3>
+                <h3>Reception</h3>
                 <p>Tuesday, Nov 4 @ 6:00 PM</p>
                 <p>Padre Pio Pavilion, Natures Village Resort</p>
                 <div class="map-container">
@@ -183,7 +193,7 @@
           </div>
         </div>
       </div>
-      <button class="scroll-btn right" onclick="scrollDetails(300)">›</button>
+      <button id="detailsScrollRight" class="scroll-btn right" type="button" aria-label="Scroll details right" title="Scroll right" onclick="scrollDetails(300)">&rarr;</button>
     </div>
   </section>
 
