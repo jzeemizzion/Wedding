@@ -48,93 +48,104 @@
     }
     .hero-invite .invite-word {
       display: inline-block;
-      opacity: 0;
-      -webkit-transform: translateY(18px);
-      transform: translateY(18px);
-      -webkit-animation: inviteWordReveal 0.52s ease forwards;
-      animation: inviteWordReveal 0.52s ease forwards;
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
       will-change: transform, opacity;
     }
-    .hero-invite .invite-word:nth-child(1) { animation-delay: 0.10s; }
-    .hero-invite .invite-word:nth-child(2) { animation-delay: 0.18s; }
-    .hero-invite .invite-word:nth-child(3) { animation-delay: 0.26s; }
-    .hero-invite .invite-word:nth-child(4) { animation-delay: 0.34s; }
-    .hero-invite .invite-word:nth-child(5) { animation-delay: 0.42s; }
-    .hero-invite .invite-word:nth-child(6) { animation-delay: 0.50s; }
-    .hero-invite .invite-word:nth-child(7) { animation-delay: 0.58s; }
-    .hero-invite .invite-word:nth-child(8) { animation-delay: 0.66s; }
-    .hero-invite .invite-word:nth-child(9) { animation-delay: 0.74s; }
     .hero-names {
       font-family: var(--fancy-serif);
       font-size: clamp(4rem, 9.5vw, 6.8rem);
       letter-spacing: 1.35px;
       margin-bottom: 8px;
-      opacity: 0;
-      -webkit-transform: translateY(20px);
-      transform: translateY(20px);
-      -webkit-animation: heroTitleReveal 1.15s cubic-bezier(.2,.65,.2,1) 1.02s forwards;
-      animation: heroTitleReveal 1.15s cubic-bezier(.2,.65,.2,1) 1.02s forwards;
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
     }
-        @keyframes inviteWordReveal {
-          0% {
-            opacity: 0;
-            transform: translateY(18px);
-            filter: blur(2px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
-          }
-        }
-
     .hero-date { font-size: 1.2rem; border-top: 1px solid var(--white); border-bottom: 1px solid var(--white); display: inline-block; padding: 10px 20px; margin-top: 20px; }
-        @-webkit-keyframes inviteWordReveal {
-          0% {
-            opacity: 0;
-            -webkit-transform: translateY(18px);
-            transform: translateY(18px);
-          }
-          100% {
-            opacity: 1;
-            -webkit-transform: translateY(0);
-            transform: translateY(0);
-          }
-        }
 
-        @keyframes inviteWordReveal {
-          0% {
-            opacity: 0;
-            transform: translateY(22px) scale(0.98);
-          }
-          60% {
-            opacity: 1;
-            transform: translateY(-2px) scale(1.005);
-          }
-          100% {
-            opacity: 1;
-        @-webkit-keyframes heroTitleReveal {
-          0% {
-            opacity: 0;
-            -webkit-transform: translateY(22px) scale(0.98);
-            transform: translateY(22px) scale(0.98);
-          }
-          60% {
-            opacity: 1;
-            -webkit-transform: translateY(-2px) scale(1.005);
-            transform: translateY(-2px) scale(1.005);
-          }
-          100% {
-            opacity: 1;
-            -webkit-transform: translateY(0) scale(1);
-            transform: translateY(0) scale(1);
-          }
-        }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-invite .invite-word {
+        opacity: 0;
+        -webkit-transform: translateY(18px);
+        transform: translateY(18px);
+        -webkit-animation: inviteWordReveal 0.52s ease forwards;
+        animation: inviteWordReveal 0.52s ease forwards;
+      }
+      .hero-invite .invite-word:nth-child(1) { animation-delay: 0.10s; }
+      .hero-invite .invite-word:nth-child(2) { animation-delay: 0.18s; }
+      .hero-invite .invite-word:nth-child(3) { animation-delay: 0.26s; }
+      .hero-invite .invite-word:nth-child(4) { animation-delay: 0.34s; }
+      .hero-invite .invite-word:nth-child(5) { animation-delay: 0.42s; }
+      .hero-invite .invite-word:nth-child(6) { animation-delay: 0.50s; }
+      .hero-invite .invite-word:nth-child(7) { animation-delay: 0.58s; }
+      .hero-invite .invite-word:nth-child(8) { animation-delay: 0.66s; }
+      .hero-invite .invite-word:nth-child(9) { animation-delay: 0.74s; }
 
-            transform: translateY(0) scale(1);
-            filter: blur(0);
-          }
-        }
+      .hero-names {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+        transform: translateY(20px);
+        -webkit-animation: heroTitleReveal 1.15s cubic-bezier(.2,.65,.2,1) 1.02s forwards;
+        animation: heroTitleReveal 1.15s cubic-bezier(.2,.65,.2,1) 1.02s forwards;
+      }
+    }
+
+    @-webkit-keyframes inviteWordReveal {
+      0% {
+        opacity: 0;
+        -webkit-transform: translateY(18px);
+        transform: translateY(18px);
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+    }
+    @keyframes inviteWordReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @-webkit-keyframes heroTitleReveal {
+      0% {
+        opacity: 0;
+        -webkit-transform: translateY(22px) scale(0.98);
+        transform: translateY(22px) scale(0.98);
+      }
+      60% {
+        opacity: 1;
+        -webkit-transform: translateY(-2px) scale(1.005);
+        transform: translateY(-2px) scale(1.005);
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: translateY(0) scale(1);
+        transform: translateY(0) scale(1);
+      }
+    }
+    @keyframes heroTitleReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.98);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.005);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
     .countdown { display: flex; justify-content: center; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
     .countdown-item { min-width: 88px; padding: 14px 12px; border: 1px solid rgba(255,255,255,0.35); border-radius: 16px; background: rgba(255,255,255,0.12); backdrop-filter: blur(6px); }
     .countdown-value { display: block; font-size: 2rem; font-weight: 700; line-height: 1; }
