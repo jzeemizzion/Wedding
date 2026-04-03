@@ -53,6 +53,16 @@
       transform: none;
       will-change: transform, opacity;
     }
+    .hero-of {
+      font-family: var(--fancy-script);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+      margin: 0 0 8px;
+      text-shadow: 1px 2px 6px rgba(0,0,0,0.35);
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
     .hero-names {
       font-family: var(--fancy-serif);
       font-size: clamp(4rem, 9.5vw, 6.8rem);
@@ -81,6 +91,16 @@
       .hero-invite .invite-word:nth-child(7) { animation-delay: 0.58s; }
       .hero-invite .invite-word:nth-child(8) { animation-delay: 0.66s; }
       .hero-invite .invite-word:nth-child(9) { animation-delay: 0.74s; }
+
+      .hero-of {
+        opacity: 0;
+        -webkit-transform: translateY(12px);
+        transform: translateY(12px);
+        -webkit-animation: inviteWordReveal 0.48s ease forwards;
+        animation: inviteWordReveal 0.48s ease forwards;
+        -webkit-animation-delay: 0.86s;
+        animation-delay: 0.86s;
+      }
 
       .hero-names {
         opacity: 0;
@@ -154,6 +174,26 @@
     #story { background-color: var(--white); text-align: center; }
     .section-title { font-size: 2.5rem; color: var(--dark-navy); margin-bottom: 20px; position: relative; display: inline-block; }
     .section-title::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--primary-blue); margin: 10px auto 0; }
+
+    /* Scroll Reveal */
+    .reveal-on-scroll {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.65s ease, transform 0.65s ease;
+      will-change: opacity, transform;
+    }
+    .reveal-up { transform: translateY(22px); }
+    .reveal-soft { transform: translateY(16px); }
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal-on-scroll {
+        opacity: 0;
+      }
+    }
 
     /* Details - Flip Cards */
     #details { background-color: var(--dark-navy); color: var(--white); text-align: center; position: relative; overflow: hidden; }
@@ -399,11 +439,19 @@
 
     /* Mobile Responsive */
     @media (max-width: 768px) {
+      #hero {
+        min-height: 100svh;
+        height: auto;
+        padding-top: 110px;
+        padding-bottom: 44px;
+      }
       .hero-content h1 { font-size: 2.5rem; }
       .hero-invite {
-        font-size: clamp(2.2rem, 9vw, 3.2rem);
-        line-height: 1.2;
+        font-size: clamp(1.95rem, 8.4vw, 3rem);
+        line-height: 1.28;
         margin-bottom: 12px;
+        max-width: 100%;
+        padding: 0 4px;
       }
       .hero-names {
         font-size: clamp(3.2rem, 12.5vw, 4.8rem);

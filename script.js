@@ -90,6 +90,37 @@ function initDetailsArrows() {
   updateArrowState();
 }
 
+function initScrollReveal() {
+  const revealItems = document.querySelectorAll('.reveal-on-scroll');
+  if (!revealItems.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach((item) => item.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      const element = entry.target;
+      const revealDelay = parseFloat(element.dataset.revealDelay || '0');
+      if (Number.isFinite(revealDelay) && revealDelay > 0) {
+        element.style.transitionDelay = `${revealDelay}s`;
+      }
+
+      element.classList.add('is-visible');
+      obs.unobserve(element);
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -8% 0px'
+  });
+
+  revealItems.forEach((item) => observer.observe(item));
+}
+
 // Card Toggle Function - Mobile tap to transition between front and back
 function flipCard(card) {
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -113,4 +144,5 @@ function flipCard(card) {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 initDetailsArrows();
+initScrollReveal();
 
