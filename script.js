@@ -90,35 +90,109 @@ function initDetailsArrows() {
   updateArrowState();
 }
 
-function initScrollReveal() {
-  const revealItems = document.querySelectorAll('.reveal-on-scroll');
-  if (!revealItems.length) return;
+function canRunEntryAnimations() {
+  const reducedMotionQuery = typeof window.matchMedia === 'function'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)')
+    : null;
 
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-    revealItems.forEach((item) => item.classList.add('is-visible'));
+  if (reducedMotionQuery && reducedMotionQuery.matches) {
+    return false;
+  }
+
+  if (!window.CSS || typeof window.CSS.supports !== 'function') {
+    return false;
+  }
+
+  return window.CSS.supports('animation-name', 'heroTitleReveal')
+    && window.CSS.supports('transform', 'translateY(10px)');
+}
+
+function initHeroAnimations() {
+  if (!canRunEntryAnimations()) {
     return;
   }
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
+  document.documentElement.classList.add('can-animate');
+}
 
-      const element = entry.target;
-      const revealDelay = parseFloat(element.dataset.revealDelay || '0');
-      if (Number.isFinite(revealDelay) && revealDelay > 0) {
-        element.style.transitionDelay = `${revealDelay}s`;
+function initScrollReveal() {
+  const revealItems = Array.from(document.querySelectorAll('.reveal-on-scroll'));
+  if (!revealItems.length) return;
+
+  const reducedMotionQuery = typeof window.matchMedia === 'function'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)')
+    : null;
+  const prefersReducedMotion = Boolean(reducedMotionQuery && reducedMotionQuery.matches);
+
+  const revealElement = (element) => {
+    if (element.classList.contains('is-visible')) {
+      return true;
+    }
+
+    const revealDelay = parseFloat(element.dataset.revealDelay || '0');
+    if (Number.isFinite(revealDelay) && revealDelay > 0) {
+      element.style.transitionDelay = `${revealDelay}s`;
+    }
+
+    element.classList.add('is-visible');
+    return true;
+  };
+
+  if (prefersReducedMotion) {
+    revealItems.forEach(revealElement);
+    return;
+  }
+
+  document.documentElement.classList.add('reveal-ready');
+
+  let remainingItems = revealItems.slice();
+  let observer = null;
+
+  const revealVisibleItems = () => {
+    remainingItems = remainingItems.filter((item) => {
+      const rect = item.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const isVisible = rect.top <= viewportHeight * 0.92 && rect.bottom >= viewportHeight * 0.08;
+
+      if (!isVisible) {
+        return true;
       }
 
-      element.classList.add('is-visible');
-      obs.unobserve(element);
+      revealElement(item);
+      if (observer) {
+        observer.unobserve(item);
+      }
+      return false;
     });
-  }, {
-    threshold: 0.08,
-    rootMargin: '0px 0px -8% 0px'
-  });
 
-  revealItems.forEach((item) => observer.observe(item));
+    if (!remainingItems.length) {
+      window.removeEventListener('scroll', revealVisibleItems);
+      window.removeEventListener('resize', revealVisibleItems);
+    }
+  };
+
+  if ('IntersectionObserver' in window) {
+    observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        revealElement(entry.target);
+        obs.unobserve(entry.target);
+        remainingItems = remainingItems.filter((item) => item !== entry.target);
+      });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    remainingItems.forEach((item) => observer.observe(item));
+  }
+
+  window.addEventListener('scroll', revealVisibleItems, { passive: true });
+  window.addEventListener('resize', revealVisibleItems);
+  revealVisibleItems();
 }
 
 // Card Toggle Function - Mobile tap to transition between front and back
@@ -144,5 +218,6 @@ function flipCard(card) {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 initDetailsArrows();
+initHeroAnimations();
 initScrollReveal();
 

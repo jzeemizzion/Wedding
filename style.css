@@ -54,13 +54,13 @@
       will-change: transform, opacity;
     }
     .hero-of {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
-      font-style: italic;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      line-height: 1;
-      margin: 2px 0 10px;
+      font-family: var(--fancy-script);
+      font-size: clamp(2.1rem, 4.3vw, 3.2rem);
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.05;
+      margin: 4px 0 10px;
       text-shadow: 1px 2px 6px rgba(0,0,0,0.35);
       opacity: 1;
       -webkit-transform: none;
@@ -78,41 +78,39 @@
     }
     .hero-date { font-size: 1.2rem; border-top: 1px solid var(--white); border-bottom: 1px solid var(--white); display: inline-block; padding: 10px 20px; margin-top: 20px; }
 
-    @media (prefers-reduced-motion: no-preference) {
-      .hero-invite .invite-word {
-        opacity: 0;
-        -webkit-transform: translateY(18px);
-        transform: translateY(18px);
-        -webkit-animation: inviteWordReveal 0.52s ease forwards;
-        animation: inviteWordReveal 0.52s ease forwards;
-      }
-      .hero-invite .invite-word:nth-child(1) { animation-delay: 0.10s; }
-      .hero-invite .invite-word:nth-child(2) { animation-delay: 0.18s; }
-      .hero-invite .invite-word:nth-child(3) { animation-delay: 0.26s; }
-      .hero-invite .invite-word:nth-child(4) { animation-delay: 0.34s; }
-      .hero-invite .invite-word:nth-child(5) { animation-delay: 0.42s; }
-      .hero-invite .invite-word:nth-child(6) { animation-delay: 0.50s; }
-      .hero-invite .invite-word:nth-child(7) { animation-delay: 0.58s; }
-      .hero-invite .invite-word:nth-child(8) { animation-delay: 0.66s; }
-      .hero-invite .invite-word:nth-child(9) { animation-delay: 0.74s; }
+    .can-animate .hero-invite .invite-word {
+      opacity: 0;
+      -webkit-transform: translateY(18px);
+      transform: translateY(18px);
+      -webkit-animation: inviteWordReveal 0.52s ease forwards;
+      animation: inviteWordReveal 0.52s ease forwards;
+    }
+    .can-animate .hero-invite .invite-word:nth-child(1) { animation-delay: 0.10s; }
+    .can-animate .hero-invite .invite-word:nth-child(2) { animation-delay: 0.18s; }
+    .can-animate .hero-invite .invite-word:nth-child(3) { animation-delay: 0.26s; }
+    .can-animate .hero-invite .invite-word:nth-child(4) { animation-delay: 0.34s; }
+    .can-animate .hero-invite .invite-word:nth-child(5) { animation-delay: 0.42s; }
+    .can-animate .hero-invite .invite-word:nth-child(6) { animation-delay: 0.50s; }
+    .can-animate .hero-invite .invite-word:nth-child(7) { animation-delay: 0.58s; }
+    .can-animate .hero-invite .invite-word:nth-child(8) { animation-delay: 0.66s; }
+    .can-animate .hero-invite .invite-word:nth-child(9) { animation-delay: 0.74s; }
 
-      .hero-of {
-        opacity: 0;
-        -webkit-transform: translateY(10px) scale(0.96);
-        transform: translateY(10px) scale(0.96);
-        -webkit-animation: heroOfReveal 0.56s cubic-bezier(.22,.7,.2,1) forwards;
-        animation: heroOfReveal 0.56s cubic-bezier(.22,.7,.2,1) forwards;
-        -webkit-animation-delay: 0.86s;
-        animation-delay: 0.86s;
-      }
+    .can-animate .hero-of {
+      opacity: 0;
+      -webkit-transform: translateY(10px) scale(0.96);
+      transform: translateY(10px) scale(0.96);
+      -webkit-animation: heroOfReveal 0.56s cubic-bezier(.22,.7,.2,1) forwards;
+      animation: heroOfReveal 0.56s cubic-bezier(.22,.7,.2,1) forwards;
+      -webkit-animation-delay: 0.86s;
+      animation-delay: 0.86s;
+    }
 
-      .hero-names {
-        opacity: 0;
-        -webkit-transform: translateY(20px);
-        transform: translateY(20px);
-        -webkit-animation: heroTitleReveal 1.15s cubic-bezier(.2,.65,.2,1) 1.02s forwards;
-        animation: heroTitleReveal 1.15s cubic-bezier(.2,.65,.2,1) 1.02s forwards;
-      }
+    .can-animate .hero-names {
+      opacity: 0;
+      -webkit-transform: translateY(20px);
+      transform: translateY(20px);
+      -webkit-animation: heroTitleReveal 1.15s cubic-bezier(.2,.65,.2,1) 1.02s forwards;
+      animation: heroTitleReveal 1.15s cubic-bezier(.2,.65,.2,1) 1.02s forwards;
     }
 
     @-webkit-keyframes inviteWordReveal {
@@ -215,20 +213,17 @@
     .reveal-on-scroll {
       opacity: 1;
       transform: none;
+    }
+    .reveal-ready .reveal-on-scroll {
+      opacity: 0;
       transition: opacity 0.65s ease, transform 0.65s ease;
       will-change: opacity, transform;
     }
-    .reveal-up { transform: translateY(22px); }
-    .reveal-soft { transform: translateY(16px); }
-    .reveal-on-scroll.is-visible {
+    .reveal-ready .reveal-up { transform: translateY(22px); }
+    .reveal-ready .reveal-soft { transform: translateY(16px); }
+    .reveal-ready .reveal-on-scroll.is-visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .reveal-on-scroll {
-        opacity: 0;
-      }
     }
 
     /* Details - Flip Cards */
